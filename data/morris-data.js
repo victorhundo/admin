@@ -4,58 +4,58 @@ $(function() {
         element: 'morris-area-chart',
         data: [{
             period: '2010 Q1',
-            iphone: 2666,
-            ipad: null,
-            itouch: 2647
+            Uzantoj: 2666,
+            Landoj: null,
+            Grupoj: 2647
         }, {
             period: '2010 Q2',
-            iphone: 2778,
-            ipad: 2294,
-            itouch: 2441
+            Uzantoj: 2778,
+            Landoj: 2294,
+            Grupoj: 2441
         }, {
             period: '2010 Q3',
-            iphone: 4912,
-            ipad: 1969,
-            itouch: 2501
+            Uzantoj: 4912,
+            Landoj: 1969,
+            Grupoj: 2501
         }, {
             period: '2010 Q4',
-            iphone: 3767,
-            ipad: 3597,
-            itouch: 5689
+            Uzantoj: 3767,
+            Landoj: 3597,
+            Grupoj: 5689
         }, {
             period: '2011 Q1',
-            iphone: 6810,
-            ipad: 1914,
-            itouch: 2293
+            Uzantoj: 6810,
+            Landoj: 1914,
+            Grupoj: 2293
         }, {
             period: '2011 Q2',
-            iphone: 5670,
-            ipad: 4293,
-            itouch: 1881
+            Uzantoj: 5670,
+            Landoj: 4293,
+            Grupoj: 1881
         }, {
             period: '2011 Q3',
-            iphone: 4820,
-            ipad: 3795,
-            itouch: 1588
+            Uzantoj: 4820,
+            Landoj: 3795,
+            Grupoj: 1588
         }, {
             period: '2011 Q4',
-            iphone: 15073,
-            ipad: 5967,
-            itouch: 5175
+            Uzantoj: 15073,
+            Landoj: 5967,
+            Grupoj: 5175
         }, {
             period: '2012 Q1',
-            iphone: 10687,
-            ipad: 4460,
-            itouch: 2028
+            Uzantoj: 10687,
+            Landoj: 4460,
+            Grupoj: 2028
         }, {
             period: '2012 Q2',
-            iphone: 8432,
-            ipad: 5713,
-            itouch: 1791
+            Uzantoj: 8432,
+            Landoj: 5713,
+            Grupoj: 1791
         }],
         xkey: 'period',
-        ykeys: ['iphone', 'ipad', 'itouch'],
-        labels: ['iPhone', 'iPad', 'iPod Touch'],
+        ykeys: ['Uzantoj', 'Landoj', 'Grupoj'],
+        labels: ['Uzantoj', 'Landoj', 'Grupoj'],
         pointSize: 2,
         hideHover: 'auto',
         resize: true
@@ -113,5 +113,5 @@ $(function() {
         hideHover: 'auto',
         resize: true
     });
-    
+
 });
