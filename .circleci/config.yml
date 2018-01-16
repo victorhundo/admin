@@ -48,7 +48,7 @@ jobs:
             docker cp uea-admin2:/app/lib /opt/gh-pages/
             docker cp uea-admin2:/app/app.js /opt/gh-pages/
             docker cp uea-admin2:/app/config.js /opt/gh-pages/
-            docker cp uea-admin2:/app/index.js /opt/gh-pages/
+            docker cp uea-admin2:/app/index.html /opt/gh-pages/
             git checkout gh-pages && rm -rf *
             cp -rf /opt/gh-pages/* ./
             git add .
