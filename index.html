@@ -37,6 +37,11 @@
     <script src="../lib/morrisjs/morris.min.js"></script>
     <script src="../data/morris-data.js"></script>
 
+    <!-- DataTables JavaScript -->
+    <script src="../lib/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <script src="../lib/datatables-responsive/js/dataTables.responsive.js"></script>
+
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
@@ -51,6 +56,11 @@
 
     <!-- Morris Charts CSS -->
     <link href="../lib/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../lib/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="../lib/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+    <link href="../lib/datatables-responsive/css/dataTables.responsive.scss" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -89,7 +99,7 @@
 <body ng-app="admin">
 
   <!--view-->
-  <div ng-include="'components/novo-menu/menuo.htm'"
+  <div ng-include="'components/menuo/menuo.htm'"
        ng-show="menuo"
        ng-controller="menuoCtrl">
   </div>

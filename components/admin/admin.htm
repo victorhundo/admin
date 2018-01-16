@@ -1,69 +1,113 @@
-<div class="enhavo" data-ng-init="init()">
-  <h1>
-    Administrantoj en la sistemo
-  </h1>
-
-  <h2>
-    <a href="#!/admin" ng-click="nova = !nova" ng-init="nova = true">
-      + Aldoni novan administranton
-    </a>
-  </h2>
-
-  <!--formularo por aldoni novan landon-->
-  <form ng-submit="novaAdmin()" ng-hide="nova" class="form-inline col-md-12">
-    <p>{{eraro}}</p>
-    <div class="form-group col-md-12">
-      <label for="radiko">Uzantnomo</label>
-      <input type="text"
-             id="radiko"
-             ng-model="admin.uzantnomo"
-             class="form-control" required>
+<div id="page-wrapper" data-ng-init="init()">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Administrantoj en la sistemo</h1>
+        </div>
+        <!-- /.col-lg-12 -->
     </div>
-    <div class="form-group col-md-12">
-      <label for="finajxo">Pasvorto</label>
-      <input type="password"
-             id="finajxo"
-             ng-model="admin.pasvorto"
-             class="form-control" required>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    DataTables Advanced Tables
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Uzantnomo</th>
+                                <th>Pasvorto</th>
+                                <th>Roloj</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="a in administrantoj">
+                            <td>{{a.uzantnomo}}</td>
+                            <td>
+                              <a href="#"
+                                 editable-password="a.pasvorto"
+                                 onbeforesave="updateAdmin(a.id, $data, 'pasvorto')">
+                                 Ŝanĝi pasvorton
+                               </a>
+                             </td>
+                            <td><h ng-repeat="rajto in a.rajtoj">{{rajto.nomo}}, </h></td>
+                            <td>
+                              <a href="" ng-click="deleteAdmin(a.id)">
+                                <i class="fa fa-trash" aria-hidden="true"></i> Forviŝi
+                              </a>
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
     </div>
-    <div class="form-group  col-md-12">
-      <label>Roloj: </label>
-      <label class="radio-inline" ng-repeat="rajto in rajtoj">
-        <input type="checkbox" ng-model="rajto.elektita">
-        {{rajto.nomo}}
-      </label>
+    <!-- /.row -->
+
+    <!-- Button trigger modal -->
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Aldoni novan administranton
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Aldoni novan administranton</h4>
+                </div>
+                <div class="modal-body">
+                  <form ng-submit="novaAdmin()" ng-hide="nova">
+                    <p>{{eraro}}</p>
+                    <div class="form-group col-md-12">
+                      <label for="radiko">Uzantnomo</label>
+                      <input type="text"
+                             id="radiko"
+                             ng-model="admin.uzantnomo"
+                             class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-12">
+                      <label for="finajxo">Pasvorto</label>
+                      <input type="password"
+                             id="finajxo"
+                             ng-model="admin.pasvorto"
+                             class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                      <label>Roloj: </label>
+                      <label class="radio-inline" ng-repeat="rajto in rajtoj">
+                        <input type="checkbox" ng-model="rajto.elektita">
+                        {{rajto.nomo}}
+                      </label>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="submit" type="submit" class="btn btn-primary">Aldoni</button>
+                </div>
+              </div>
+          </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
+    <!-- /.modal -->
 
-    <button id="submit" type="submit" class="btn btn-primary col-md-4">Aldoni</button>
-    <br><br>
-  </form>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+$(document).ready(function() {
+    $('#dataTables-example').DataTable({
+        responsive: true
+    });
+});
+</script>
 
-  <label>serĉi: <input placeholder="Uzantnomo aŭ Roloj" ng-model="searchText" class="form-control col-md-12"></label>
-  <!--Tabelo kun enhavo-->
-  <table class="table">
-    <thead>
-      <tr>
-        <td><b>Uzantnomo</b></td>
-        <td><b>Pasvorto</b></td>
-        <td><b>Roloj</b></td>
-      </tr>
-    </thead>
-    <tr ng-repeat="a in administrantoj | orderBy:'uzantnomo' | filter:searchText">
-      <td>{{a.uzantnomo}}</td>
-      <td>
-        <a href="#"
-           editable-password="a.pasvorto"
-           onbeforesave="updateAdmin(a.id, $data, 'pasvorto')">
-           Ŝanĝi pasvorton
-         </a>
-       </td>
-      <td><h ng-repeat="rajto in a.rajtoj">{{rajto.nomo}}, </h></td>
-      <td>
-        <a href="" ng-click="deleteAdmin(a.id)">
-          <i class="fa fa-trash" aria-hidden="true"></i> Forviŝi
-        </a>
-      </td>
-    </tr>
-  </table>
-  <p>* klaku en la kampoj por redakti</p>
-</div>
+<!-- /#page-wrapper -->

@@ -1,11 +1,11 @@
 angular.module('admin').config(function($routeProvider){
     $routeProvider
     .when("/login", {
-      templateUrl: "components/novo-login/login.htm",
+      templateUrl: "components/login/login.htm",
       controller: "loginCtrl"
     })
     .when("/", {
-      templateUrl: "components/novo-login/login.htm",
+      templateUrl: "components/login/login.htm",
       controller: "loginCtrl"
     })
     .when("/admin", {

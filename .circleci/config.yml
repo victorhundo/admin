@@ -1,0 +1,63 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/cci-demo-docker-primary:0.0.2
+
+    branches:
+      only:
+        - master
+
+    steps:
+      - checkout
+
+      - run:
+          name: Instalar cliente Docker
+          command: |
+            set -x
+            VER="17.03.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
+      - run:
+          name: Instalar Docker Compose
+          command: |
+            set -x
+            curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
+
+      - setup_remote_docker
+
+      - run:
+          name: Build container
+          command: |
+            set -x
+            docker-compose -f docker-circle.yaml up --build -d
+            echo Wait container is ready!
+            sleep 20
+
+      - run:
+          name: Deploy GitHub Pages
+          command: |
+            set -x
+            mkdir -p /opt/gh-pages
+            cp -rf ./components /opt/gh-pages/
+            cp -rf ./config /opt/gh-pages/
+            cp -rf ./data /opt/gh-pages/
+            cp -rf ./dist /opt/gh-pages/
+            cp -rf ./lib /opt/gh-pages/
+            cp app.js /opt/gh-pages/
+            cp config.js /opt/gh-pages/
+            cp index.js /opt/gh-pages/
+            git checkout gh-pages && rm -rf *
+            cp -rf /opt/gh-pages/* ./
+            git add .
+            git -c user.name='CircleCI' -c user.email='circleci' commit -m 'UPDATE GitHub Pages'
+            git push
+
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: raw-test-output
+
+      - store_test_results:
+          path: /tmp/test-results
