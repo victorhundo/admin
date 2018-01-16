@@ -2,6 +2,6 @@
 
 cd /app
 npm install
-node_modules/bower/bin/bower install --allow-root
-gulp
+npm install bower && node_modules/bower/bin/bower install --allow-root
+#gulp
 npm start

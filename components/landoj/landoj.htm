@@ -1,0 +1,101 @@
+<div class="enhavo" data-ng-init="init()">
+  <h1>
+    Landoj en la sistemo
+  </h1>
+
+  <h2>
+    <a href="#!/landoj" ng-click="novaL = !novaL" ng-init="novaL = true">
+      + Aldoni novan landon
+    </a>
+  </h2>
+
+  <!--formularo por aldoni novan landon-->
+  <form ng-submit="novaLando()" ng-hide="novaL">
+    <div class="form-group">
+      <label for="radiko">Radiko en esperanto (ekz: Brit)</label>
+      <input type="text"
+             id="radiko"
+             ng-model="lando.radikoEo"
+             class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="finajxo">Finaĵo en esperanto (ekz: "io" aŭ "o")</label>
+      <input type="text"
+             id="finajxo"
+             ng-model="lando.finajxoEo"
+             class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="landkodo">2-litera Landkodo (ekz. GB)</label>
+      <input type="text"
+             id="landkodo"
+             ng-model="lando.landkodo"
+             maxlength="2"
+             class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="valuto">Valuto uzita de UEA (Ekz GBP):</label>
+      <input type="text"
+             id="valuto"
+             ng-model="lando.valuto"
+             class="form-control">
+    </div>
+    <button id="submit" type="submit" class="btn btn-primary">Aldoni</button>
+    <br><br>
+  </form>
+
+
+  <label>Serĉi: <input ng-model="searchText" class="form-control"></label>
+
+  <!--Tabelo kun enhavo-->
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Radiko en Esperanto</td>
+        <td>Finaĵo en Esperanto</td>
+        <td>Valuto uzita de UEA</td>
+        <td>2-litera Landkodo</td>
+      </tr>
+    </thead>
+    <tr ng-repeat="l in landoj | orderBy:'radikoEo' | filter:searchText">
+      <td>
+        {{l.radikoEo}}
+        <a href="#"
+           editable-text="l.radikoEo"
+           onbeforesave="updateLando(l.id, $data, 'radikoEo')">
+           Redakti
+        </a>
+      </td>
+      <td>
+        {{l.finajxoEo}}
+        <a href="#"
+           editable-text="l.finajxoEo"
+           onbeforesave="updateLando(l.id, $data, 'finajxoEo')">
+           Redakti
+         </a>
+       </td>
+      <td>
+        {{l.valuto}}
+        <a href="#"
+           editable-text="l.valuto"
+           onbeforesave="updateLando(l.id, $data, 'valuto')">
+           Redakti
+         </a>
+       </td>
+      <td>
+        {{l.landkodo}}
+        <a href="#"
+           editable-text="l.landkodo"
+           onbeforesave="updateLando(l.id, $data, 'landKodo')">
+           Redakti
+         </a>
+       </td>
+      <td>
+        <a href="" ng-click="deleteLando(l.id)">
+          <i class="fa fa-trash" aria-hidden="true"></i> Forviŝi
+        </a>
+      </td>
+    </tr>
+  </table>
+
+</div>

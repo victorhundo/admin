@@ -1,0 +1,69 @@
+<div class="enhavo" data-ng-init="init()">
+  <h1>
+    Administrantoj en la sistemo
+  </h1>
+
+  <h2>
+    <a href="#!/admin" ng-click="nova = !nova" ng-init="nova = true">
+      + Aldoni novan administranton
+    </a>
+  </h2>
+
+  <!--formularo por aldoni novan landon-->
+  <form ng-submit="novaAdmin()" ng-hide="nova" class="form-inline col-md-12">
+    <p>{{eraro}}</p>
+    <div class="form-group col-md-12">
+      <label for="radiko">Uzantnomo</label>
+      <input type="text"
+             id="radiko"
+             ng-model="admin.uzantnomo"
+             class="form-control" required>
+    </div>
+    <div class="form-group col-md-12">
+      <label for="finajxo">Pasvorto</label>
+      <input type="password"
+             id="finajxo"
+             ng-model="admin.pasvorto"
+             class="form-control" required>
+    </div>
+    <div class="form-group  col-md-12">
+      <label>Roloj: </label>
+      <label class="radio-inline" ng-repeat="rajto in rajtoj">
+        <input type="checkbox" ng-model="rajto.elektita">
+        {{rajto.nomo}}
+      </label>
+    </div>
+
+    <button id="submit" type="submit" class="btn btn-primary col-md-4">Aldoni</button>
+    <br><br>
+  </form>
+
+  <label>serĉi: <input placeholder="Uzantnomo aŭ Roloj" ng-model="searchText" class="form-control col-md-12"></label>
+  <!--Tabelo kun enhavo-->
+  <table class="table">
+    <thead>
+      <tr>
+        <td><b>Uzantnomo</b></td>
+        <td><b>Pasvorto</b></td>
+        <td><b>Roloj</b></td>
+      </tr>
+    </thead>
+    <tr ng-repeat="a in administrantoj | orderBy:'uzantnomo' | filter:searchText">
+      <td>{{a.uzantnomo}}</td>
+      <td>
+        <a href="#"
+           editable-password="a.pasvorto"
+           onbeforesave="updateAdmin(a.id, $data, 'pasvorto')">
+           Ŝanĝi pasvorton
+         </a>
+       </td>
+      <td><h ng-repeat="rajto in a.rajtoj">{{rajto.nomo}}, </h></td>
+      <td>
+        <a href="" ng-click="deleteAdmin(a.id)">
+          <i class="fa fa-trash" aria-hidden="true"></i> Forviŝi
+        </a>
+      </td>
+    </tr>
+  </table>
+  <p>* klaku en la kampoj por redakti</p>
+</div>

@@ -1,0 +1,13 @@
+<div class="enhavo" data-ng-init="init1()">
+  <h3>Elektu kategorion por vidi ĝiajn membrojn</h3>
+  <h2>
+    <ul>
+      <li ng-repeat="mem in membrecgrupoj">
+        {{mem.nomo}} - <a href="#!/membroj/{{mem.id}}">Vidi membrojn >></a>
+      </li>
+      <li ng-repeat="krom in krommembrecoj">
+        {{krom.nomo}} - <a href="#!/membroj/{{krom.id}}">Vidi membrojn >></a>
+      </li>
+    </ul>
+  </h2>
+</div>
