@@ -32,7 +32,7 @@ jobs:
           name: Build container
           command: |
             set -x
-            docker-compose up --build -d
+            docker-compose -f docker-circle.yaml up --build -d
             echo Wait container is ready!
             sleep 20
 

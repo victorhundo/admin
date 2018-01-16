@@ -1,0 +1,9 @@
+version: '3'
+services:
+  server:
+    build: ./docker/circle
+    image: uea-admin
+    restart: always
+    container_name: uea-admin2
+    ports:
+      - 8001:80
